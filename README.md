@@ -1,1 +1,1 @@
-# midas
+# Project MIDAS
