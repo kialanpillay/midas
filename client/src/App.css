@@ -65,11 +65,27 @@ html {
   margin-top: 2rem;
 }
 
-#sentimentContent {
+.link {
+  color: whitesmoke;
+}
+
+
+#sentiment {
   margin-top: 10rem;
   margin-bottom: 4rem;
 }
 
+#footer {
+  bottom: 0;
+  margin-bottom: 1rem;
+  width: 100%;
+  font-size: 0.6rem;
+  margin-left: 1rem;
+  letter-spacing: 0.1rem;
+  text-align: left;
+  color: whitesmoke;
+  width: 100%;
+}
 
 @keyframes App-logo-spin {
   from {

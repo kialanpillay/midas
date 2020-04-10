@@ -7,6 +7,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Chart from "./Chart";
+import Cloud from "./Cloud";
 import "./App.css";
 
 class App extends React.Component {
@@ -34,7 +35,7 @@ class App extends React.Component {
   handleSentimentAnalysis = (event) => {
     //const formData = this.state.formData;
     this.setState({ isLoading: true });
-    fetch("http://127.0.0.1:5000/sentiment", {
+    fetch("http://127.0.0.1:5000/midas/sentiment", {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -50,7 +51,7 @@ class App extends React.Component {
         });
         console.log(response.result)
       });
-      window.location.href = "#sentimentContent";
+      window.location.href = "#sentiment";
   };
   
 
@@ -120,13 +121,11 @@ class App extends React.Component {
                 <Chart />
               </Col>
             </Row>
-            <Row id="sentimentContent">
+            <Row id="sentiment">
             <Col md="auto">
                 <Card style={{ width: "68rem", height: "20rem" }}>
+                <Card.Header as="h5" className="mb-2 text-muted">Sentiment Analysis Results</Card.Header>
                   <Card.Body>
-                    <Card.Title className="mb-2 text-muted">
-                      Sentiment Analysis Results
-                    </Card.Title>
                     <Card.Text className="mb-2 text-muted">
                       {this.state.result}
                     </Card.Text>
@@ -135,7 +134,9 @@ class App extends React.Component {
               </Col>
             </Row>
           </Container>
+          
         </div>
+        <footer id="footer">&copy; KIALAN PILLAY c/o AlPHA Q LABS. POWERED BY <a className="link" href="https://newsapi.org">NEWSAPI.ORG</a></footer>
       </div>
     );
   }

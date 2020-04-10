@@ -34,7 +34,7 @@ model = api.model('Midas Params',
 
 ###################
 
-@api.route("/sentiment")
+@api.route("/midas/sentiment")
 class Sentiment(Resource):
 
 	def options(self):
