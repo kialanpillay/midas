@@ -14,29 +14,33 @@ class App extends React.Component {
     super(props);
 
     this.state = {
+      isLoading: false,
+      result: ""
     };
+
+    this.handleSentimentAnalysis = this.handleSentimentAnalysis.bind(this);
   }
 
   handleChange = (event) => {
     const value = event.target.value;
     const name = event.target.name;
-    var formData = this.state.formData;
-    formData[name] = value;
-    this.setState({
-      formData,
-    });
+    //var formData = this.state.formData;
+    //formData[name] = value;
+    //this.setState({
+    //  formData,
+    //});
   };
 
-  handlePredictClick = (event) => {
-    const formData = this.state.formData;
+  handleSentimentAnalysis = (event) => {
+    //const formData = this.state.formData;
     this.setState({ isLoading: true });
-    fetch("http://127.0.0.1:3000/sentiment/", {
+    fetch("http://localhost:3000/sentiment/", {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
       method: "POST",
-      body: JSON.stringify(formData),
+      //body: JSON.stringify(formData),
     })
       .then((response) => response.json())
       .then((response) => {
@@ -50,7 +54,7 @@ class App extends React.Component {
   handleCancelClick = (event) => {
     this.setState({ result: "" });
   };
-  
+
   render() {
     return (
       <div className="App">
@@ -59,7 +63,7 @@ class App extends React.Component {
             <p id="logo">Μίδας </p>| PROJECT MIDAS
           </Navbar.Brand>
         </Navbar>
-        <body className="App-body">
+        <div className="App-body">
           <Container>
             <Row>
               <Col>
@@ -85,7 +89,7 @@ class App extends React.Component {
                       globe, processes them using an NLTK sentiment classifier,
                       and generates a keyword heatmap and sentiment graph.
                     </Card.Text>
-                    <Button className="button" variant="dark" size="lg">
+                    <Button className="button" variant="dark" size="lg" onClick={!this.state.isLoading ? this.handleSentimentAnalysis : null}>
                       Analyse
                     </Button>
                   </Card.Body>
@@ -114,7 +118,7 @@ class App extends React.Component {
               </Col>
             </Row>
           </Container>
-        </body>
+        </div>
       </div>
     );
   }
