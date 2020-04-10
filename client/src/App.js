@@ -7,7 +7,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Chart from "./components/Chart";
-import DataTabs from "./components/DataTabs";
+import DataPanel from "./components/DataPanel";
 import "./App.css";
 
 class App extends React.Component {
@@ -126,7 +126,7 @@ class App extends React.Component {
             </Row>
             <Row id="row">
               <Col id="data" hidden={this.state.isEmpty} md="auto" style={{ marginTop: "4rem", marginBottom : "4rem"}}>
-                  <DataTabs result={this.state.result} key={this.state.action} />
+                  <DataPanel result={this.state.result} key={this.state.action} />
               </Col>
             </Row>
           </Container>

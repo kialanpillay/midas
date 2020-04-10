@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import SentimentChart from "./SentimentChart"
 import SentimentBarChart from "./SentimentBarChart"
-export default class DataTabs extends React.Component {
+export default class DataPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
