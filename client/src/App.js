@@ -6,8 +6,8 @@ import Col from "react-bootstrap/Col";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Chart from "./Chart";
-import Cloud from "./Cloud";
+import Chart from "./components/Chart";
+import DataTabs from "./components/DataTabs";
 import "./App.css";
 
 class App extends React.Component {
@@ -16,7 +16,9 @@ class App extends React.Component {
 
     this.state = {
       isLoading: false,
-      result: ""
+      isEmpty: true,
+      action: 'sentiment',
+      result: "No Data"
     };
 
     this.handleSentimentAnalysis = this.handleSentimentAnalysis.bind(this);
@@ -48,10 +50,11 @@ class App extends React.Component {
         this.setState({
           result: response.result,
           isLoading: false,
+          isEmpty: false,
         });
         console.log(response.result)
       });
-      window.location.href = "#sentiment";
+      window.location.href = "#data";
   };
   
 
@@ -121,22 +124,15 @@ class App extends React.Component {
                 <Chart />
               </Col>
             </Row>
-            <Row id="sentiment">
-            <Col md="auto">
-                <Card style={{ width: "68rem", height: "20rem" }}>
-                <Card.Header as="h5" className="mb-2 text-muted">Sentiment Analysis Results</Card.Header>
-                  <Card.Body>
-                    <Card.Text className="mb-2 text-muted">
-                      {this.state.result}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
+            <Row id="row">
+              <Col id="data" hidden={this.state.isEmpty} md="auto" style={{ marginTop: "4rem", marginBottom : "4rem"}}>
+                  <DataTabs result={this.state.result} key={this.state.action} />
               </Col>
             </Row>
           </Container>
           
         </div>
-        <footer id="footer">&copy; KIALAN PILLAY c/o AlPHA Q LABS. POWERED BY <a className="link" href="https://newsapi.org">NEWSAPI.ORG</a></footer>
+        <footer id="footer">&copy; KIALAN PILLAY c/o ALPHA Q LABS. POWERED BY <a className="link" href="https://newsapi.org">NEWSAPI.ORG</a></footer>
       </div>
     );
   }

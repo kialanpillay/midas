@@ -70,17 +70,35 @@ html {
 }
 
 
-#sentiment {
-  margin-top: 10rem;
-  margin-bottom: 4rem;
+#row {
+  margin-top: 4rem;
+  margin-bottom: 2.5rem;
 }
+
+.empty {
+  margin-top: 5rem;
+}
+
+.classificationLabel {
+  display: inline-block;
+}
+
+.classification {
+  color: whitesmoke;
+  display: inline-block;
+}
+
+.dataHeading {
+  color: whitesmoke
+}
+
 
 #footer {
   bottom: 0;
-  margin-bottom: 1rem;
-  width: 100%;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  width: 95%;
   font-size: 0.6rem;
-  margin-left: 1rem;
   letter-spacing: 0.1rem;
   text-align: left;
   color: whitesmoke;
