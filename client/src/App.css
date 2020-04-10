@@ -4,6 +4,10 @@
   background-color: #282c34;
 }
 
+html {
+  background-color: #282c34;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -59,6 +63,11 @@
 
 .button{
   margin-top: 2rem;
+}
+
+#sentimentContent {
+  margin-top: 10rem;
+  margin-bottom: 4rem;
 }
 
 

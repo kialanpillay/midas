@@ -22,8 +22,8 @@ class App extends React.Component {
   }
 
   handleChange = (event) => {
-    const value = event.target.value;
-    const name = event.target.name;
+    //const value = event.target.value;
+    //const name = event.target.name;
     //var formData = this.state.formData;
     //formData[name] = value;
     //this.setState({
@@ -34,13 +34,13 @@ class App extends React.Component {
   handleSentimentAnalysis = (event) => {
     //const formData = this.state.formData;
     this.setState({ isLoading: true });
-    fetch("http://localhost:3000/sentiment/", {
+    fetch("http://127.0.0.1:5000/sentiment", {
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       },
-      method: "POST",
-      //body: JSON.stringify(formData),
+      method: "GET"
+      //body: JSON.stringify(formData)
     })
       .then((response) => response.json())
       .then((response) => {
@@ -48,8 +48,11 @@ class App extends React.Component {
           result: response.result,
           isLoading: false,
         });
+        console.log(response.result)
       });
+      window.location.href = "#sentimentContent";
   };
+  
 
   handleCancelClick = (event) => {
     this.setState({ result: "" });
@@ -115,6 +118,20 @@ class App extends React.Component {
               </Col>
               <Col>
                 <Chart />
+              </Col>
+            </Row>
+            <Row id="sentimentContent">
+            <Col md="auto">
+                <Card style={{ width: "68rem", height: "20rem" }}>
+                  <Card.Body>
+                    <Card.Title className="mb-2 text-muted">
+                      Sentiment Analysis Results
+                    </Card.Title>
+                    <Card.Text className="mb-2 text-muted">
+                      {this.state.result}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
               </Col>
             </Row>
           </Container>

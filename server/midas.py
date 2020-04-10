@@ -2,14 +2,14 @@ from flask import Flask, request, jsonify, make_response
 from flask_restplus import Api, Resource, fields
 # from sklearn.externals import joblib
 
-flask_app = Flask(__name__)
-app = Api(app = flask_app, 
+app = Flask(__name__)
+api = Api(app = app, 
 		  version = "1.0", 
-		  title = "Midas Sentiment Analysis")
+		  title = "Midas Server")
 
-name_space = app.namespace('sentiment', description='Sentiment Analysis APIs')
+# name_space = api.namespace('Functions', description='Midas API')
 
-model = app.model('Sentiment Params', 
+model = api.model('Midas Params', 
 				  {'textField1': fields.String(required = False, 
 				  							   description="Text Field 1", 
     					  				 	   help="Text Field 1 cannot be blank"),
@@ -34,7 +34,7 @@ model = app.model('Sentiment Params',
 
 ###################
 
-@name_space.route("/sentiment")
+@api.route("/sentiment")
 class Sentiment(Resource):
 
 	def options(self):
@@ -44,12 +44,11 @@ class Sentiment(Resource):
 		response.headers.add('Access-Control-Allow-Methods', "*")
 		return response
 
-	@app.expect(model)		
-	def post(self):
+	@api.expect(model)		
+	def get(self):
 		try: 
 			# formData = request.json
 			data = "Test"
-			# prediction = classifier.predict(data)
 			response = jsonify({
 				"statusCode": 200,
 				"status": "Successful",
