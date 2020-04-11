@@ -84,7 +84,7 @@ export default class DataPanel extends React.Component {
                       Articles Retrieved:{" "}
                       {this.props.sentimentResponse.articles}
                     </h3>
-                    <h3>Keywords: [Fed, Bullish, XAUUSD, Coronavirus]</h3>
+                    <h3>Keywords: [Gold, Commodity, XAUUSD, Economy]</h3>
                   </Col>
                 </Row>
               </div>

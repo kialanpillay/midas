@@ -27,45 +27,45 @@ model = api.model(
 
 def remove_noise(tweet_tokens, stop_words=()):
 
-    cleaned_tokens = []
+	cleaned_tokens = []
 
-    for token, tag in pos_tag(tweet_tokens):
-        token = re.sub(
-            "http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|"
-            "(?:%[0-9a-fA-F][0-9a-fA-F]))+",
-            "",
-            token,
-        )
-        token = re.sub("(@[A-Za-z0-9_]+)", "", token)
+	for token, tag in pos_tag(tweet_tokens):
+		token = re.sub(
+			"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|"
+			"(?:%[0-9a-fA-F][0-9a-fA-F]))+",
+			"",
+			token,
+		)
+		token = re.sub("(@[A-Za-z0-9_]+)", "", token)
 
-        if tag.startswith("NN"):
-            pos = "n"
-        elif tag.startswith("VB"):
-            pos = "v"
-        else:
-            pos = "a"
+		if tag.startswith("NN"):
+			pos = "n"
+		elif tag.startswith("VB"):
+			pos = "v"
+		else:
+			pos = "a"
 
-        lemmatizer = WordNetLemmatizer()
-        token = lemmatizer.lemmatize(token, pos)
+		lemmatizer = WordNetLemmatizer()
+		token = lemmatizer.lemmatize(token, pos)
 
-        if (
-            len(token) > 0
-            and token not in string.punctuation
-            and token.lower() not in stop_words
-        ):
-            cleaned_tokens.append(token.lower())
-    return cleaned_tokens
+		if (
+			len(token) > 0
+			and token not in string.punctuation
+			and token.lower() not in stop_words
+		):
+			cleaned_tokens.append(token.lower())
+	return cleaned_tokens
 
 
 def get_all_words(cleaned_tokens_list):
-    for tokens in cleaned_tokens_list:
-        for token in tokens:
-            yield token
+	for tokens in cleaned_tokens_list:
+		for token in tokens:
+			yield token
 
 
 def get_tweets_for_model(cleaned_tokens_list):
-    for tweet_tokens in cleaned_tokens_list:
-        yield dict([token, True] for token in tweet_tokens)
+	for tweet_tokens in cleaned_tokens_list:
+		yield dict([token, True] for token in tweet_tokens)
 
 
 def sentiment_model_train():
@@ -110,48 +110,50 @@ def sentiment_model_train():
 
 def sentiment(classifier):
 
-    url = "https://newsapi.org/v2/everything?q=(gold AND commodity) OR XAUUSD&apiKey=e3c7d810af0e41dd869013ab5c5d66e9"
-    r = requests.get(url=url)
-    data = r.json()
-    results = data["totalResults"]
+	url = "https://newsapi.org/v2/everything?q=(gold AND commodity) OR XAUUSD OR economy&apiKey=e3c7d810af0e41dd869013ab5c5d66e9"
+	r = requests.get(url=url)
+	data = r.json()
+	results = data["totalResults"]
 
-    pages = int(100 / 20)
-    if results % 20 != 0:
-        pages += 1
+	pages = int(100 / 20)
+	if results % 20 != 0:
+		pages += 1
 
-    articles = []
-    for i in range(1, pages):
-        url = (
-            "https://newsapi.org/v2/everything?q=(gold AND commodity) OR XAUUSD&page="
+	articles = []
+	for i in range(1, pages):
+		url = (
+            "https://newsapi.org/v2/everything?q=(gold AND commodity) OR XAUUSD OR economy&page="
             + str(i)
             + "&apiKey=e3c7d810af0e41dd869013ab5c5d66e9"
         )
-        r = requests.get(url=url)
-        data = r.json()
-        articles.append(data["articles"])
+		r = requests.get(url=url)
+		data = r.json()
+		articles.append(data["articles"])
 
     
 
-    positive_articles = 0
-    negative_articles = 0
-    neutral_articles = 0
+	positive_articles = 0
+	negative_articles = 0
+	neutral_articles = 0
 
-    for article in articles:
-        description = article["description"]
-        description_tokens = remove_noise(word_tokenize(description))
-        classification = classifier.classify(
-            dict([token, True] for token in description_tokens)
-        )
-        if classification == "Positive":
-            positive_articles += 1
-        else:
-            negative_articles += 1
+	for page in articles:
+		for article in page:
+			description = article["description"]
+			description_tokens = remove_noise(word_tokenize(description))
+			classification = classifier.classify(
+				dict([token, True] for token in description_tokens)
+			)
+			if classification == "Positive":
+				positive_articles += 1
+			else:
+				negative_articles += 1
 
-    return results, positive_articles, negative_articles, neutral_articles
+	return results, positive_articles, negative_articles, neutral_articles
 
 
 ###################
 classifier = sentiment_model_train()
+results, positive_articles, negative_articles, neutral_articles = sentiment(classifier)
 print("Sentiment Classifier Trained")
 ###################
 
@@ -169,7 +171,6 @@ class Sentiment(Resource):
 	@api.expect(model)
 	def get(self):
 		try:
-			results, positive_articles, negative_articles, neutral_articles = sentiment(classifier)
 			response = jsonify(
                 {
                     "statusCode": 200,
