@@ -52,15 +52,15 @@ class Sentiment(Resource):
 	def get(self):
 		try: 
 			# formData = request.json
-			data = "Test"
+			data = {"totalResults":4200}
 			response = jsonify({
 				"statusCode": 200,
 				"status": "Successful",
 				"result": "Analysis: " + str(data),
-				"long": 40,
-				"short": 55,
+				"positive": 40,
+				"negative": 55,
 				"neutral": 5,
-				"articles": 3000
+				"articles": data['totalResults']
 				})
 			response.headers.add('Access-Control-Allow-Origin', '*')
 			return response

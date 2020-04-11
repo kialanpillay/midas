@@ -4,8 +4,8 @@ import { PieChart, Pie, Cell } from "recharts";
 export default class SentimentChart extends PureComponent {
   render() {
     const data = [
-      { name: "Long", value: this.props.long },
-      { name: "Short", value: this.props.short },
+      { name: "Positive", value: this.props.positive },
+      { name: "Negative", value: this.props.negative },
       { name: "Neutral", value: this.props.neutral },
     ];
     const colors = ["#1E88E5", "#E53935", "#6E757C"];

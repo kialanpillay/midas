@@ -26,7 +26,7 @@ export default class DataPanel extends React.Component {
           <div style={{ width: "68rem", height: "32rem", marginTop: "1rem" }}>
             <Card.Body>
               <Card.Text className="mb-2 text-muted">
-                <h1 className="dataHeading">Gold Price Sentiment (30 Days)</h1>
+                <h1 className="dataHeading">Economic Sentiment (30 Days)</h1>
               </Card.Text>
               <Card.Text
                 className="mb-2 text-muted"
@@ -34,15 +34,15 @@ export default class DataPanel extends React.Component {
               >
                 <Row>
                   <Col>
-                    <h2 className="classificationLabel">Long:&nbsp;</h2>
+                    <h2 className="classificationLabel">Positive:&nbsp;</h2>
                     <h2 className="classification">
-                      {this.props.sentimentResponse.long}%
+                      {this.props.sentimentResponse.positive}%
                     </h2>
                   </Col>
                   <Col>
-                    <h2 className="classificationLabel">Short:&nbsp;</h2>
+                    <h2 className="classificationLabel">Negative:&nbsp;</h2>
                     <h2 className="classification">
-                      {this.props.sentimentResponse.short}%
+                      {this.props.sentimentResponse.negative}%
                     </h2>
                   </Col>
                   <Col>
@@ -60,15 +60,15 @@ export default class DataPanel extends React.Component {
                 <Row>
                   <Col md="auto">
                     <SentimentChart
-                      long={this.props.sentimentResponse.long}
-                      short={this.props.sentimentResponse.short}
+                      positive={this.props.sentimentResponse.positive}
+                      negative={this.props.sentimentResponse.negative}
                       neutral={this.props.sentimentResponse.neutral}
                     />
                   </Col>
                   <Col md="auto">
                     <SentimentBarChart
-                      long={this.props.sentimentResponse.long}
-                      short={this.props.sentimentResponse.short}
+                      positive={this.props.sentimentResponse.positive}
+                      negative={this.props.sentimentResponse.negative}
                       neutral={this.props.sentimentResponse.neutral}
                     />
                   </Col>

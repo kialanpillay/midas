@@ -86,7 +86,7 @@ if __name__ == "__main__":
 
     print(classifier.show_most_informative_features(10))
 
-    custom_tweet = "I ordered just once from TerribleCo, they screwed up, never used the app again."
+    custom_tweet = "Gold prices snapped a five session decline and traded positive after various measure undertaken by the Fed with an objective to stabilize the economy amidst the coronavirus outbreak."
 
     custom_tokens = remove_noise(word_tokenize(custom_tweet))
 
