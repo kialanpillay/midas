@@ -13,7 +13,7 @@ export default class SentimentBarChart extends PureComponent {
     ];
 
     return (
-      <BarChart width={250} height={150} data={data}>
+      <BarChart width={250} height={200} data={data}>
         <Bar dataKey="long" fill="#1E88E5" />
         <Bar dataKey="short" fill="#E53935" />
         <Bar dataKey="neutral" fill="#6E757C" />

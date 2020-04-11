@@ -10,14 +10,14 @@ export default class SentimentChart extends PureComponent {
     ];
     const colors = ["#1E88E5", "#E53935", "#6E757C"];
     return (
-      <PieChart width={300} height={200}>
+      <PieChart width={320} height={280}>
         <Pie
           data={data}
           dataKey="value"
           startAngle={180}
           endAngle={0}
-          cx={140}
-          cy={140}
+          cx={150}
+          cy={180}
           outerRadius={120}
           fill="#8884d8"
           label

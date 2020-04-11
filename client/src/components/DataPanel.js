@@ -92,7 +92,7 @@ export default class DataPanel extends React.Component {
           </div>
         </Tab>
         <Tab eventKey="trend" title="Trend Prediction">
-          <div style={{ width: "68rem", height: "20rem", marginTop: "1rem" }}>
+          <div style={{ width: "68rem", height: "32rem", marginTop: "1rem" }}>
             <Card.Body>
               <Card.Text className="mb-2 text-muted">
                 <h1 className="dataHeading">Trendline Prediction</h1>
