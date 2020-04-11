@@ -57,9 +57,9 @@ class Sentiment(Resource):
 				"statusCode": 200,
 				"status": "Successful",
 				"result": "Analysis: " + str(data),
-				"long": 60,
-				"short": 30,
-				"neutral": 10,
+				"long": 40,
+				"short": 55,
+				"neutral": 5,
 				"articles": 3000
 				})
 			response.headers.add('Access-Control-Allow-Origin', '*')

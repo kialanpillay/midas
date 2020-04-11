@@ -16,7 +16,7 @@ export default class SentimentChart extends PureComponent {
           dataKey="value"
           startAngle={180}
           endAngle={0}
-          cx={120}
+          cx={140}
           cy={140}
           outerRadius={120}
           fill="#8884d8"
