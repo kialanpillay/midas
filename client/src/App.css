@@ -95,7 +95,7 @@ html {
 
 #footer {
   bottom: 0;
-  padding-bottom: 1rem;
+  margin-bottom: 1rem;
   padding-left: 1rem;
   width: 95%;
   font-size: 0.6rem;

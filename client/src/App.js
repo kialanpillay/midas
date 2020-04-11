@@ -17,8 +17,9 @@ class App extends React.Component {
     this.state = {
       isLoading: false,
       isEmpty: true,
-      action: 'sentiment',
-      result: "No Data"
+      action: "",
+      sentimentResponse: [],
+      trendResponse: [],
     };
 
     this.handleSentimentAnalysis = this.handleSentimentAnalysis.bind(this);
@@ -39,24 +40,23 @@ class App extends React.Component {
     this.setState({ isLoading: true });
     fetch("http://127.0.0.1:5000/midas/sentiment", {
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
-      method: "GET"
+      method: "GET",
       //body: JSON.stringify(formData)
     })
       .then((response) => response.json())
       .then((response) => {
         this.setState({
-          result: response.result,
+          sentimentResponse: response,
           isLoading: false,
           isEmpty: false,
+          action: "sentiment"
         });
-        console.log(response.result)
       });
-      window.location.href = "#data";
+    window.location.href = "#data";
   };
-  
 
   handleCancelClick = (event) => {
     this.setState({ result: "" });
@@ -94,9 +94,18 @@ class App extends React.Component {
                     <Card.Text className="mb-2 text-muted">
                       Midas retrieves thousands of articles from around the
                       globe, processes them using an NLTK sentiment classifier,
-                      and generates a keyword heatmap and sentiment graph.
+                      and generates a sentiment graph and keyword frequency list.
                     </Card.Text>
-                    <Button className="button" variant="dark" size="lg" onClick={!this.state.isLoading ? this.handleSentimentAnalysis : null}>
+                    <Button
+                      className="button"
+                      variant="dark"
+                      size="lg"
+                      onClick={
+                        !this.state.isLoading
+                          ? this.handleSentimentAnalysis
+                          : null
+                      }
+                    >
                       Analyse
                     </Button>
                   </Card.Body>
@@ -124,15 +133,23 @@ class App extends React.Component {
                 <Chart />
               </Col>
             </Row>
-            <Row id="row">
-              <Col id="data" hidden={this.state.isEmpty} md="auto" style={{ marginTop: "4rem", marginBottom : "4rem"}}>
-                  <DataPanel result={this.state.result} key={this.state.action} />
+            <Row id="row" >
+              <Col id="data" hidden={this.state.isEmpty} md="auto" style={{ marginTop: "4rem", marginBottom: "4rem" }}>
+                <DataPanel
+                  sentimentResponse={this.state.sentimentResponse}
+                  trendResponse={this.state.trendResponse}
+                  key={this.state.action}
+                />
               </Col>
             </Row>
           </Container>
-          
         </div>
-        <footer id="footer">&copy; KIALAN PILLAY c/o ALPHA Q LABS. POWERED BY <a className="link" href="https://newsapi.org">NEWSAPI.ORG</a></footer>
+        <footer id="footer">
+          &copy; KIALAN PILLAY c/o ALPHA Q LABS. SENTIMENT ANALYSIS POWERED BY{" "}
+          <a className="link" href="https://newsapi.org">
+            NEWSAPI.ORG
+          </a>
+        </footer>
       </div>
     );
   }

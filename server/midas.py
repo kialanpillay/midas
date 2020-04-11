@@ -56,7 +56,11 @@ class Sentiment(Resource):
 			response = jsonify({
 				"statusCode": 200,
 				"status": "Successful",
-				"result": "Analysis: " + str(data)
+				"result": "Analysis: " + str(data),
+				"long": 60,
+				"short": 30,
+				"neutral": 10,
+				"articles": 3000
 				})
 			response.headers.add('Access-Control-Allow-Origin', '*')
 			return response
