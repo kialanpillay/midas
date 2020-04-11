@@ -25,10 +25,10 @@ export default class DataPanel extends React.Component {
         <Tab eventKey="sentiment" title="Sentiment Analysis">
           <div style={{ width: "68rem", height: "32rem", marginTop: "1rem" }}>
             <Card.Body>
-              <Card.Text className="mb-2 text-muted">
+              <div className="mb-2 text-muted">
                 <h1 className="dataHeading">Economic Sentiment (30 Days)</h1>
-              </Card.Text>
-              <Card.Text
+              </div>
+              <div
                 className="mb-2 text-muted"
                 style={{ marginTop: "2rem" }}
               >
@@ -52,8 +52,8 @@ export default class DataPanel extends React.Component {
                     </h2>
                   </Col>
                 </Row>
-              </Card.Text>
-              <Card.Text
+              </div>
+              <div
                 className="mb-2 text-muted"
                 style={{ marginTop: "2rem" }}
               >
@@ -73,8 +73,8 @@ export default class DataPanel extends React.Component {
                     />
                   </Col>
                 </Row>
-              </Card.Text>
-              <Card.Text
+              </div>
+              <div
                 className="mb-2 text-muted"
                 style={{ marginTop: "0rem" }}
               >
@@ -87,17 +87,17 @@ export default class DataPanel extends React.Component {
                     <h3>Keywords: [Fed, Bullish, XAUUSD, Coronavirus]</h3>
                   </Col>
                 </Row>
-              </Card.Text>
+              </div>
             </Card.Body>
           </div>
         </Tab>
         <Tab eventKey="trend" title="Trend Prediction">
           <div style={{ width: "68rem", height: "32rem", marginTop: "1rem" }}>
             <Card.Body>
-              <Card.Text className="mb-2 text-muted">
+              <div className="mb-2 text-muted">
                 <h1 className="dataHeading">Trendline Prediction</h1>
-              </Card.Text>
-              <Card.Text
+              </div>
+              <div
                 className="mb-2 text-muted"
                 style={{ marginTop: "2rem" }}
               >
@@ -109,7 +109,7 @@ export default class DataPanel extends React.Component {
                     <h2>Bear: 4%</h2>
                   </Col>
                 </Row>
-              </Card.Text>
+              </div>
             </Card.Body>
           </div>
         </Tab>
