@@ -118,11 +118,12 @@ def sentiment(classifier):
     negative_articles = 0
     neutral_articles = 0
     tokens = []
+    stop_words = stopwords.words("english")
+
     for page in articles:
         for article in page:
             description = article["description"]
             description_tokens = remove_noise(word_tokenize(description))
-            tokens.append(description_tokens)
             classification = classifier.classify(
                 dict([token, True] for token in description_tokens)
             )
@@ -130,9 +131,18 @@ def sentiment(classifier):
                 positive_articles += 1
             else:
                 negative_articles += 1
+            
+            for token in description_tokens:
+
+                if (
+                    len(token) > 0
+                    and token not in string.punctuation
+                    and token.lower() not in stop_words
+                ):
+                    tokens.append(token.lower())
 
     fd = FreqDist(get_all_words(tokens))
-    fd.most_common(20)
+    print(fd.most_common(20))
 
     return results, positive_articles, negative_articles, neutral_articles
 
