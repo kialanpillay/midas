@@ -110,7 +110,7 @@ def sentiment_model_train():
 
 def sentiment(classifier):
 
-	url = "https://newsapi.org/v2/everything?q=(gold AND commodity) OR XAUUSD OR economy&apiKey=e3c7d810af0e41dd869013ab5c5d66e9"
+	url = "https://newsapi.org/v2/everything?q=(gold AND commodity) OR XAUUSD&apiKey=e3c7d810af0e41dd869013ab5c5d66e9"
 	r = requests.get(url=url)
 	data = r.json()
 	results = data["totalResults"]
@@ -122,7 +122,7 @@ def sentiment(classifier):
 	articles = []
 	for i in range(1, pages):
 		url = (
-            "https://newsapi.org/v2/everything?q=(gold AND commodity) OR XAUUSD OR economy&page="
+            "https://newsapi.org/v2/everything?q=(gold AND commodity) OR XAUUSD&page="
             + str(i)
             + "&apiKey=e3c7d810af0e41dd869013ab5c5d66e9"
         )
@@ -154,7 +154,7 @@ def sentiment(classifier):
 ###################
 classifier = sentiment_model_train()
 results, positive_articles, negative_articles, neutral_articles = sentiment(classifier)
-print("Sentiment Classifier Trained")
+print(" * Sentiment Classifier Trained")
 ###################
 
 

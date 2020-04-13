@@ -26,7 +26,7 @@ export default class DataPanel extends React.Component {
           <div style={{ width: "68rem", height: "32rem", marginTop: "1rem" }}>
             <Card.Body>
               <div className="mb-2 text-muted">
-                <h1 className="dataHeading">Economic Sentiment (30 Days)</h1>
+                <h1 className="dataHeading">Fundamental Sentiment (30 Days)</h1>
               </div>
               <div
                 className="mb-2 text-muted"
