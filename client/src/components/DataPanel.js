@@ -6,11 +6,14 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import SentimentChart from "./SentimentChart";
 import SentimentBarChart from "./SentimentBarChart";
+import FrequencyTable from "./FrequencyTable";
 export default class DataPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       key: props.key,
+      keywords: ["Gold", "Commodity", " XAUUSD"],
+      filtered: [],
     };
     this.setKey = this.setKey.bind(this);
   }
@@ -19,19 +22,30 @@ export default class DataPanel extends React.Component {
     this.setState({ key: key });
   }
 
+  componentWillReceiveProps(props) {
+    const words = this.state.keywords.map((word) => {
+      return word.toLowerCase();
+    })
+    let filtered = []
+    for(let i = 0; i < props.sentimentResponse.frequency.length; i++){
+      if (!words.includes(props.sentimentResponse.frequency[i][0])) {
+        filtered.push(props.sentimentResponse.frequency[i])
+      }
+    }
+    console.log(filtered);
+    this.setState({ filtered: filtered });
+  }
+
   render() {
     return (
       <Tabs activeKey={this.state.key} onSelect={(k) => this.setKey(k)}>
         <Tab eventKey="sentiment" title="Sentiment Analysis">
-          <div style={{ width: "68rem", height: "32rem", marginTop: "1rem" }}>
+          <div style={{ width: "68rem", height: "36rem", marginTop: "1rem" }}>
             <Card.Body>
               <div className="mb-2 text-muted">
                 <h1 className="dataHeading">Fundamental Sentiment (30 Days)</h1>
               </div>
-              <div
-                className="mb-2 text-muted"
-                style={{ marginTop: "2rem" }}
-              >
+              <div className="mb-2 text-muted" style={{ marginTop: "2rem" }}>
                 <Row>
                   <Col>
                     <h2 className="classificationLabel">Positive:&nbsp;</h2>
@@ -53,10 +67,7 @@ export default class DataPanel extends React.Component {
                   </Col>
                 </Row>
               </div>
-              <div
-                className="mb-2 text-muted"
-                style={{ marginTop: "2rem" }}
-              >
+              <div className="mb-2 text-muted" style={{ marginTop: "1rem" }}>
                 <Row>
                   <Col md="auto">
                     <SentimentChart
@@ -72,19 +83,21 @@ export default class DataPanel extends React.Component {
                       neutral={this.props.sentimentResponse.neutral}
                     />
                   </Col>
+                  <Col>
+                    <FrequencyTable frequency={this.state.filtered} />
+                  </Col>
                 </Row>
               </div>
-              <div
-                className="mb-2 text-muted"
-                style={{ marginTop: "0rem" }}
-              >
+              <div className="mb-2 text-muted" style={{ marginTop: "0rem" }}>
                 <Row>
                   <Col>
                     <h3>
                       Articles Retrieved:{" "}
                       {this.props.sentimentResponse.articles}
                     </h3>
-                    <h3>Keywords: [Gold, Commodity, XAUUSD, Economy]</h3>
+                    <h3>Keywords: [{this.state.keywords.map((item) => {
+                      return item + " "
+                    })}]</h3>
                   </Col>
                 </Row>
               </div>
@@ -92,15 +105,12 @@ export default class DataPanel extends React.Component {
           </div>
         </Tab>
         <Tab eventKey="trend" title="Trend Prediction">
-          <div style={{ width: "68rem", height: "32rem", marginTop: "1rem" }}>
+          <div style={{ width: "68rem", height: "36rem", marginTop: "1rem" }}>
             <Card.Body>
               <div className="mb-2 text-muted">
                 <h1 className="dataHeading">Trendline Prediction</h1>
               </div>
-              <div
-                className="mb-2 text-muted"
-                style={{ marginTop: "2rem" }}
-              >
+              <div className="mb-2 text-muted" style={{ marginTop: "2rem" }}>
                 <Row>
                   <Col>
                     <h2>Bull: 34%</h2>

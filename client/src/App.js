@@ -17,7 +17,7 @@ class App extends React.Component {
     this.state = {
       isLoading: false,
       isEmpty: true,
-      action: "",
+      key: "",
       sentimentResponse: [],
       trendResponse: [],
     };
@@ -52,10 +52,11 @@ class App extends React.Component {
           sentimentResponse: response,
           isLoading: false,
           isEmpty: false,
-          action: "sentiment"
         });
       });
+    this.setState({key: "sentiment"});
     window.location.href = "#data";
+
   };
 
   handleCancelClick = (event) => {
@@ -138,7 +139,7 @@ class App extends React.Component {
                 <DataPanel
                   sentimentResponse={this.state.sentimentResponse}
                   trendResponse={this.state.trendResponse}
-                  key={this.state.action}
+                  key={this.state.key}
                 />
               </Col>
             </Row>

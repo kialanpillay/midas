@@ -92,6 +92,12 @@ html {
   color: whitesmoke
 }
 
+#frequencyTable {
+  margin-top : 1rem;
+  color: whitesmoke;
+  background-color: transparent;
+}
+
 
 #footer {
   bottom: 0;

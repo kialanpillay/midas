@@ -133,15 +133,13 @@ def sentiment(classifier):
                 negative_articles += 1
             
             for token in description_tokens:
-
                 if (
-                    len(token) > 0
-                    and token not in string.punctuation
-                    and token.lower() not in stop_words
-                ):
+                    len(token) > 2
+                ):  
                     tokens.append(token.lower())
 
-    fd = FreqDist(get_all_words(tokens))
+    fd = FreqDist(tokens)
+    most_common = fd.most_common(20)
     print(fd.most_common(20))
 
     return results, positive_articles, negative_articles, neutral_articles

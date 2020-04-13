@@ -135,6 +135,8 @@ def sentiment(classifier):
 	positive_articles = 0
 	negative_articles = 0
 	neutral_articles = 0
+	tokens = []
+	stop_words = stopwords.words("english")
 
 	for page in articles:
 		for article in page:
@@ -148,12 +150,23 @@ def sentiment(classifier):
 			else:
 				negative_articles += 1
 
-	return results, positive_articles, negative_articles, neutral_articles
+			for token in description_tokens:
+				if (
+                    len(token) > 2
+                    and token not in string.punctuation
+                    and token.lower() not in stop_words
+                ):  
+					tokens.append(token.lower())
+	
+	fd = FreqDist(tokens)
+	frequency = fd.most_common(20)
+
+	return results, positive_articles, negative_articles, neutral_articles, frequency
 
 
 ###################
 classifier = sentiment_model_train()
-results, positive_articles, negative_articles, neutral_articles = sentiment(classifier)
+results, positive_articles, negative_articles, neutral_articles, frequency = sentiment(classifier)
 print(" * Sentiment Classifier Trained")
 ###################
 
@@ -178,6 +191,7 @@ class Sentiment(Resource):
                     "positive": int((positive_articles / 100) * 100),
                     "negative": int((negative_articles / 100) * 100),
                     "neutral": int((neutral_articles / 100) * 100),
+					"frequency": frequency,
                     "articles": results,
                 }
             )
