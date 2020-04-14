@@ -91,13 +91,13 @@ export default class DataPanel extends React.Component {
               <div className="mb-2 text-muted" style={{ marginTop: "0rem" }}>
                 <Row>
                   <Col>
-                    <h3>
+                    <h4>
                       Articles Retrieved:{" "}
                       {this.props.sentimentResponse.articles}
-                    </h3>
-                    <h3>Keywords: [{this.state.keywords.map((item) => {
+                    </h4>
+                    <h4>Keywords: [{this.state.keywords.map((item) => {
                       return item + " "
-                    })}]</h3>
+                    })}]</h4>
                   </Col>
                 </Row>
               </div>
