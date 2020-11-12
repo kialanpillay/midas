@@ -25,14 +25,13 @@ export default class DataPanel extends React.Component {
   componentWillReceiveProps(props) {
     const words = this.state.keywords.map((word) => {
       return word.toLowerCase();
-    })
-    let filtered = []
-    for(let i = 0; i < props.sentimentResponse.frequency.length; i++){
+    });
+    let filtered = [];
+    for (let i = 0; i < props.sentimentResponse.frequency.length; i++) {
       if (!words.includes(props.sentimentResponse.frequency[i][0])) {
-        filtered.push(props.sentimentResponse.frequency[i])
+        filtered.push(props.sentimentResponse.frequency[i]);
       }
     }
-    console.log(filtered);
     this.setState({ filtered: filtered });
   }
 
@@ -43,25 +42,25 @@ export default class DataPanel extends React.Component {
           <div style={{ width: "68rem", height: "36rem", marginTop: "1rem" }}>
             <Card.Body>
               <div className="mb-2 text-muted">
-                <h1 className="dataHeading">Fundamental Sentiment (30 Days)</h1>
+                <h1 className="h1--heading">Fundamental Sentiment (30 Days)</h1>
               </div>
               <div className="mb-2 text-muted" style={{ marginTop: "2rem" }}>
                 <Row>
                   <Col>
-                    <h2 className="classificationLabel">Positive:&nbsp;</h2>
-                    <h2 className="classification">
+                    <h2 className="h2--classification-label">Positive:&nbsp;</h2>
+                    <h2 className="h2--classification">
                       {this.props.sentimentResponse.positive}%
                     </h2>
                   </Col>
                   <Col>
-                    <h2 className="classificationLabel">Negative:&nbsp;</h2>
-                    <h2 className="classification">
+                    <h2 className="h2--classification-label">Negative:&nbsp;</h2>
+                    <h2 className="h2--classification">
                       {this.props.sentimentResponse.negative}%
                     </h2>
                   </Col>
                   <Col>
-                    <h2 className="classificationLabel">Neutral:&nbsp;</h2>
-                    <h2 className="classification">
+                    <h2 className="h2--classification-label">Neutral:&nbsp;</h2>
+                    <h2 className="h2--classification">
                       {this.props.sentimentResponse.neutral}%
                     </h2>
                   </Col>
@@ -95,9 +94,13 @@ export default class DataPanel extends React.Component {
                       Articles Retrieved:{" "}
                       {this.props.sentimentResponse.articles}
                     </h4>
-                    <h4>Keywords: [{this.state.keywords.map((item) => {
-                      return item + " "
-                    })}]</h4>
+                    <h4>
+                      Keywords: [
+                      {this.state.keywords.map((item) => {
+                        return item + " ";
+                      })}
+                      ]
+                    </h4>
                   </Col>
                 </Row>
               </div>
@@ -108,7 +111,7 @@ export default class DataPanel extends React.Component {
           <div style={{ width: "68rem", height: "36rem", marginTop: "1rem" }}>
             <Card.Body>
               <div className="mb-2 text-muted">
-                <h1 className="dataHeading">Trendline Prediction</h1>
+                <h1 className="h1--heading">Trendline Prediction</h1>
               </div>
               <div className="mb-2 text-muted" style={{ marginTop: "2rem" }}>
                 <Row>

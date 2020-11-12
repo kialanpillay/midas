@@ -8,41 +8,10 @@ html {
   background-color: #282c34;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 10vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 1vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-#logo {
+.p--logo {
+  color: whitesmoke;;
   font-weight: 700;
   display: inline;
-}
-#nav {
-  background-color: white;
-}
-
-#brand{
-  color: #282c34;
 }
 
 .App-body {
@@ -52,16 +21,16 @@ html {
   background-color: #282c34;
 }
 
-#title{
+.h1--title {
   font-size: 5rem;
 }
 
-#tagline{
+.p--tag {
   font-size: 2rem;
   margin-bottom: 4rem;
 }
 
-.button{
+.button {
   margin-top: 2rem;
 }
 
@@ -69,38 +38,27 @@ html {
   color: whitesmoke;
 }
 
-
-#row {
-  margin-top: 4rem;
-  margin-bottom: 2.5rem;
-}
-
-.empty {
-  margin-top: 5rem;
-}
-
-.classificationLabel {
+.h2--classification-label {
   display: inline-block;
 }
 
-.classification {
+.h2--classification {
   color: whitesmoke;
   display: inline-block;
 }
 
-.dataHeading {
-  color: whitesmoke
+.h1--heading {
+  color: whitesmoke;
 }
 
-#frequencyTable {
-  margin-top : 1rem;
+.table--frequency {
+  margin-top: 1rem;
   font-size: 0.8rem;
   color: whitesmoke;
   background-color: transparent;
 }
 
-
-#footer {
+.footer {
   bottom: 0;
   margin-bottom: 1rem;
   padding-left: 1rem;
@@ -109,14 +67,4 @@ html {
   letter-spacing: 0.1rem;
   text-align: left;
   color: whitesmoke;
-  width: 100%;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

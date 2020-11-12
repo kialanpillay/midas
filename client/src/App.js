@@ -13,30 +13,18 @@ import "./App.css";
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       isLoading: false,
       isEmpty: true,
       key: "",
-      sentimentResponse: [],
-      trendResponse: [],
+      sentimentResponse: {},
+      trendResponse: {},
     };
 
     this.handleSentimentAnalysis = this.handleSentimentAnalysis.bind(this);
   }
 
-  handleChange = (event) => {
-    //const value = event.target.value;
-    //const name = event.target.name;
-    //var formData = this.state.formData;
-    //formData[name] = value;
-    //this.setState({
-    //  formData,
-    //});
-  };
-
-  handleSentimentAnalysis = (event) => {
-    //const formData = this.state.formData;
+  handleSentimentAnalysis = () => {
     this.setState({ isLoading: true });
     fetch("http://127.0.0.1:5000/midas/sentiment", {
       headers: {
@@ -44,7 +32,6 @@ class App extends React.Component {
         "Content-Type": "application/json",
       },
       method: "GET",
-      //body: JSON.stringify(formData)
     })
       .then((response) => response.json())
       .then((response) => {
@@ -54,33 +41,32 @@ class App extends React.Component {
           isEmpty: false,
         });
       });
-    this.setState({key: "sentiment"});
+    this.setState({ key: "sentiment" });
     window.location.href = "#data";
-
   };
 
-  handleCancelClick = (event) => {
+  handleCancelClick = () => {
     this.setState({ result: "" });
   };
 
   render() {
     return (
       <div className="App">
-        <Navbar id="nav" variant="dark">
-          <Navbar.Brand id="brand" href="/">
-            <p id="logo">Μίδας </p>| PROJECT MIDAS
+        <Navbar bg="none" variant="dark">
+          <Navbar.Brand href="/">
+            <p className="p--logo">Μίδας </p>| PROJECT MIDAS
           </Navbar.Brand>
         </Navbar>
         <div className="App-body">
           <Container>
             <Row>
               <Col>
-                <h1 id="title">Introducing Midas</h1>
+                <h1 id="h1--title">Introducing Midas</h1>
               </Col>
             </Row>
             <Row>
               <Col>
-                <p id="tagline">
+                <p id="p--tag">
                   A sentiment and trend analysis tool for Gold prices.
                 </p>
               </Col>
@@ -95,7 +81,8 @@ class App extends React.Component {
                     <Card.Text className="mb-2 text-muted">
                       Midas retrieves thousands of articles from around the
                       globe, processes them using an NLTK sentiment classifier,
-                      and generates a sentiment graph and keyword frequency list.
+                      and generates a sentiment graph and keyword frequency
+                      list.
                     </Card.Text>
                     <Button
                       className="button"
@@ -134,8 +121,12 @@ class App extends React.Component {
                 <Chart />
               </Col>
             </Row>
-            <Row id="row" >
-              <Col id="data" hidden={this.state.isEmpty} md="auto" style={{ marginTop: "4rem", marginBottom: "4rem" }}>
+            <Row style={{ margin: "4rem 0 2.5rem 0" }}>
+              <Col
+                hidden={this.state.isEmpty}
+                md="auto"
+                style={{ marginTop: "4rem", marginBottom: "4rem" }}
+              >
                 <DataPanel
                   sentimentResponse={this.state.sentimentResponse}
                   trendResponse={this.state.trendResponse}
@@ -143,14 +134,15 @@ class App extends React.Component {
                 />
               </Col>
             </Row>
+            <footer className="footer">
+              &copy; KIALAN PILLAY c/o ALPHA Q LABS. SENTIMENT ANALYSIS POWERED
+              BY{" "}
+              <a className="link" href="https://newsapi.org">
+                NEWSAPI.ORG
+              </a>
+            </footer>
           </Container>
         </div>
-        <footer id="footer">
-          &copy; KIALAN PILLAY c/o ALPHA Q LABS. SENTIMENT ANALYSIS POWERED BY{" "}
-          <a className="link" href="https://newsapi.org">
-            NEWSAPI.ORG
-          </a>
-        </footer>
       </div>
     );
   }
